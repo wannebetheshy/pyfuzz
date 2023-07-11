@@ -1,7 +1,7 @@
 
-from sources.decoration import banner, url_banner, Timer
-from sources.parseargumets import info
-from sources.makerequests import get_send_request, post_send_request
+from src.decoration import banner, url_banner, Timer
+from src.parsearguments import info
+from src.makerequests import get_send_request, post_send_request
 import asyncio
 import aiohttp
 import sys
