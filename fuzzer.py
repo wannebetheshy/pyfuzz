@@ -1,7 +1,7 @@
 
-from decoration import banner, url_banner, Timer
-from parseargumets import info
-from makerequests import get_send_request, post_send_request
+from sources.decoration import banner, url_banner, Timer
+from sources.parseargumets import info
+from sources.makerequests import get_send_request, post_send_request
 import asyncio
 import aiohttp
 import sys
@@ -10,9 +10,7 @@ import time
 async def main():
 
     # Getting arguments
-    print(sys.argv)
     URL, WORDLIST, SPECWORD, MAXREQSPERTIME, POST_DATA = info(sys.argv).assign_args
-    print(URL, WORDLIST, SPECWORD, MAXREQSPERTIME, POST_DATA)
 
     # Decoration part
     url_banner(URL.replace(SPECWORD, '', 1), len(WORDLIST))

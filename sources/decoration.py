@@ -2,8 +2,16 @@
 tab = '_'*10
 space = ' '*2
 
+BANNER = """
+  ___      ___ _   _ ________
+ | _ \_  _| __| | | |_  /_  /   - github.com/wannebetheshy/pyfuzz
+ |  _/ || | _|| |_| |/ / / /    by wannebetheshy
+ |_|  \_, |_|  \___//___/___|   v. 1.0
+      |__/                   """
+
 def banner():
-    print('\nok dude, this is meme banner :D')
+    print(BANNER)
+    
 
 def url_banner(url='pass',req_count=0):
     print()
