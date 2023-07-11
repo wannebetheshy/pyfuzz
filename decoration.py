@@ -10,12 +10,12 @@ def url_banner(url='pass',req_count=0):
     print(f'Url: {url}')
     print(f'Total requests: {req_count}')
 
-    print(f'{tab*4}')
+    print(f'{tab*7}')
     print()
 
     print(f' STATUS{space*2} SIZE(b){space*3}REQUEST')
 
-    print(f'{tab*4}')
+    print(f'{tab*7}')
     print()
 
 class Timer:

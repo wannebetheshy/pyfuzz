@@ -1,4 +1,3 @@
-import json
 
 def dictionary_payload(path_to_dict):
 
@@ -35,11 +34,11 @@ class info:
         
         # if command is empty
         if len(dict_arg) == 0:
-            return [False, KeyError('Please specify at least 2 arguments ( url (-u) + dictionary (-d) )')]
+            raise KeyError('Please specify at least 2 arguments ( url (-u) + dictionary (-d) )')
         
         # wordlist errors
         if 'dictionary' not in dict_arg.keys():
-            return [False, KeyError('Please specify dictionary (e.g. /home/kali/fuzzlist.txt on Linux Systems)')]
+            raise KeyError('Please specify dictionary (e.g. /home/kali/fuzzlist.txt on Linux Systems)')
         
         # special word errors
         if 'specword' not in dict_arg.keys():
@@ -49,21 +48,24 @@ class info:
         
         # url errors
         if 'url' not in dict_arg.keys():
-            return [False, KeyError('Please specify url (e.g. https://example.com/SPECWORD)')]
-        if special_word not in dict_arg['url'] and 'post_data' not in dict_arg.keys():
-            return [False, KeyError('Please write special word in the url or use default one (e.g. https://example.com/PUFF)')]
+            raise KeyError('Please specify url (e.g. https://example.com/SPECWORD)')
+        if special_word not in dict_arg['url']:
+            if not dict_arg.get('post_data',False):
+                raise KeyError('Please write special word in the url or use default one (e.g. https://example.com/PUFF)')
+            elif special_word not in dict_arg['post_data']:
+                raise KeyError('Please write special word in the post data or use default one (e.g. key=PUFF)')
+
         
         # requests per sec errors
         if 'reqspertime' in dict_arg.keys():
             try:
                 if int(dict_arg['reqspertime']) <= 0:
-                    return [False, ValueError('Please write positive number of requests (e.g. -r 5)')]
+                    raise ValueError('Please write positive number of requests (e.g. -r 5)')
             except ValueError:
                 raise ValueError('Please write integers (e.g. -r 10)')
-            except Exception as Exception_:
-                raise Exception_
-            
-        return [True,'no mistakes']
+        
+        if 'post_data' in dict_arg.keys() and dict_arg['post_data'] == "":
+            raise ValueError('Please write some data in post request, or use GET method')            
 
     def create_arglist(self):
 
@@ -84,9 +86,7 @@ class info:
             except IndexError:
                 raise IndexError('Please write data to all arguments (e.g. -u https://example.com etc.)')
         
-        if not self.check_arglist(correctdict_arg)[0]:
-            raise self.check_arglist(correctdict_arg)[1]
-        
+        self.check_arglist(correctdict_arg) 
         return correctdict_arg
     
     @property
@@ -105,8 +105,6 @@ class info:
             if el == 'reqspertime':
                 MAXREQSPERTIME = int(arguments_information[el])
             if el == 'post_data':
-                POST_DATA = json.loads(arguments_information[el])
+                POST_DATA = arguments_information[el]
 
         return URL, WORDLIST, SPECWORD, MAXREQSPERTIME, POST_DATA 
-
-# a = info(['file','-d','dictionary.txt:sssd','-u','https://youtube.com/sssd']).assign_args
