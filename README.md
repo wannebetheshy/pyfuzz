@@ -42,3 +42,8 @@ For example: -s 123
 * `-P` for post_data
 
 For example: -P 'Key=Value' - **Use with quotes!**
+
+### Be smart!
+This code DOES NOT promote or encourage any illegal activities! The content in this document is provided solely for educational purposes and to create awareness!
+
+![Oopsie, gif was here! I promise!](https://i.pinimg.com/originals/f7/08/65/f708652084b201c1ab3f5351d45a5b70.gif)
